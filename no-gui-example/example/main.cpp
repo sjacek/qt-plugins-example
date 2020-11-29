@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     if (!interface)
     {
         qDebug() << "Couldn't load interface!";
-        return 0;
+        return -1;
     }
 
     // Verify plugin emits its `name` with `QSignalSpy`.
