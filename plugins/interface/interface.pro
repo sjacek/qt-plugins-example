@@ -9,13 +9,11 @@
     error( "Couldn't find the plugins.pri file!" )
 }
 
-QT       -= gui
+QT -= gui
 
 QMAKE_PROJECT_NAME = interface
-TARGET  = $${INTERFACE_LIB_NAME}
-#TARGET  = $$qtLibraryTarget($${QMAKE_PROJECT_NAME})
+TARGET = $${INTERFACE_LIB_NAME}
 
-#TARGET = InterfacePlugin
 TEMPLATE = lib
 
 DEFINES += INTERFACEPLUGIN_LIBRARY

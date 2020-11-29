@@ -24,6 +24,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        exampleobject.cpp \
         main.cpp
 
 win32:CONFIG(release, debug|release): LIBS += -L$${LIB_DIR}/release/ -l$${INTERFACE_LIB_NAME}
@@ -36,3 +37,6 @@ else:unix: LIBS += -L$${LIB_DIR} -l$${INTERFACE_LIB_NAME}
 DISTFILES +=
 
 DESTDIR = $${APP_DIR}
+
+HEADERS += \
+    exampleobject.h
