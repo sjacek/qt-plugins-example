@@ -1,17 +1,22 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QPluginLoader>
-#include <interfaceplugin.h>
 
 #include <QDebug>
 #include <QSignalSpy>
 #include <QTimer>
 
+#include <QLoggingCategory>
+
+#include <interfaceplugin.h>
 #include "exampleobject.h"
+
+Q_LOGGING_CATEGORY(main_log, "main")
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+
     ExampleObject theObject(&a);
 
     Interface *interface;
@@ -23,7 +28,7 @@ int main(int argc, char *argv[])
         auto *plugin = loader.instance();
         if (plugin)
         {
-            qDebug() << "register plugin " << loader.fileName();
+            qCDebug(main_log) << "register plugin " << loader.fileName();
 
             interface = qobject_cast<Interface *>(plugin);
             QObject::connect(interface, SIGNAL(name(QString)), &theObject, SLOT(name(QString)));
@@ -31,7 +36,7 @@ int main(int argc, char *argv[])
     }
     if (!interface)
     {
-        qDebug() << "Couldn't load interface!";
+        qCDebug(main_log) << "Couldn't load interface!";
         return -1;
     }
 
@@ -42,11 +47,11 @@ int main(int argc, char *argv[])
     if (spy.count() == 1)
     {
         auto name = spy.takeFirst().at(0).toString();
-        qDebug() << "Plugin emitted name:" << name;
+        qCDebug(main_log) << "Plugin emitted name:" << name;
     }
     else
     {
-        qDebug() << "Not emitted!";
+        qCDebug(main_log) << "Not emitted!";
     }
     return 0;
 

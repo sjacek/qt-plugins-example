@@ -9,5 +9,5 @@ ExampleObject::ExampleObject(QObject *parent)
 
 void ExampleObject::name(QString name)
 {
-    qInfo() << "received name=" << name;
+    qCInfo(log) << "received name=" << name;
 }
